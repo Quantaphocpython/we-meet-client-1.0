@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #202124;
+    background-color: #fff;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 0.5rem;
+    width: 5em;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+}
+
+.icons .bx {
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+}
