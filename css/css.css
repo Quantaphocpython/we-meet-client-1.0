@@ -39,8 +39,61 @@ header {
     align-items: center;
 }
 
+.icons {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    padding-right: 1em;
+}
+
+#settings-btn,
+#user-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #5f6368;
+    position: relative;
+}
+
+#settings-btn:hover {
+    color: #006eff;
+}
+
+.tooltip {
+    visibility: hidden;
+    /* Ẩn đi ban đầu */
+    background-color: #333;
+    color: #ddd;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+#settings-btn:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+#user-btn:hover {
+    color: #006eff;
+}
+
 .icons .bx {
-    font-size: 20px;
+    font-size: 30px;
     width: 24px;
     height: 24px;
     margin-left: 0.5rem;

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeMeet</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/css.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -15,10 +18,15 @@
         </div>
         <div class="top-right">
             <div class="icons">
-                <i class='bx bx-cog'></i>
-                <i class='bx bxs-user'></i>
+                <button id="settings-btn"><i class='bx bx-cog'></i>
+                    <div class="tooltip">
+                        Cài đặt
+                    </div>
+                </button>
+                <button id="user-btn"><i class='bx bxs-user'></i></button>
             </div>
-          </div>
+        </div>
     </header>
 </body>
+
 </html>
