@@ -309,15 +309,14 @@ header {
   max-width: 42rem;
 }
 
-.input-box:hover .input-section {
+.input-box .input-section:hover  {
   border-color: #777777;
 }
 
-.button-join:disabled {
+.input-box .button-join:disabled {
   background-color: #d4d4d4;
-  cursor: not-allowed;
+  cursor:default;
 }
-
 
 .main-content-right {
   align-items: center;
