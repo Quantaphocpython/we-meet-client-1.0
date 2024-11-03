@@ -193,8 +193,8 @@ main {
 }
 
 main h1 {
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 2.5em;
+  font-weight:lighter;
   margin: 10px 0;
   color: #333;
 }
@@ -285,3 +285,10 @@ main h1 {
   background-color: #b19600ab;
 }
 
+.downline {
+  align-self: stretch;
+  border-bottom: 1px solid;
+  border-color: var(--gm3-sys-color-outline, #747775);
+  margin-top: 2em;
+  max-width: 42rem;  
+}
