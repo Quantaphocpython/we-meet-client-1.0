@@ -154,7 +154,6 @@ header {
     border-radius: 4px;
   }
   
-  /* Modal Body */
   .modal-body {
     margin-left: 30%;
     padding: 10px;
@@ -183,4 +182,97 @@ header {
   }
 
 /*----------------------------------main------------------------------------*/
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+main h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333;
+}
+.description {
+  font-size: 1.5em; 
+  color: #333;
+  margin-top: 15px;
+}
+
+.we {
+  font-weight: bold;
+  color: #FFD700; 
+  font-size: 1.2em;
+}
+
+.meet {
+  font-weight: bold;
+  color: #1a73e8; 
+  font-size: 1.2em;
+}
+
+.action-area {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  gap: 15px;
+}
+
+.action-btn .button-cn {
+  background-color: #1a73e8;
+  color: #fff;
+  padding: 12px 25px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn .button-cn:hover {
+  background-color: #1559b0;
+}
+
+.input-box {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.input-box .input-section input {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-box .input-section input:focus {
+  border-color: #1a73e8;
+}
+
+.input-box .button-join {
+  background-color: #FFD700;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-box .button-join:hover {
+  background-color: #b19600ab;
+}
 
