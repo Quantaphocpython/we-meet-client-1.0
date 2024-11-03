@@ -132,6 +132,9 @@ header {
 }
 
 /* Modal Menu */
+.modal{
+  z-index: 100;
+}
 .modal-menu {
   display: flex;
   flex-direction: column;
@@ -393,6 +396,17 @@ header {
   align-items: center;
   display: inline-flex;
   flex-direction: column;
-  flex-basis: 45%;
+  flex-basis: 50%;
   overflow: hidden;
+}
+.slider1 .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Giữ cho ảnh không tràn ra ngoài item */
+}
+.slider1 .item-content img {
+  width: 100%;
+  height: auto; /* Đảm bảo ảnh giữ nguyên tỷ lệ */
+  object-fit: contain; /* Hoặc dùng cover nếu muốn ảnh che hết không gian */
 }
