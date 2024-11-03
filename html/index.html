@@ -17,10 +17,10 @@
 <body>
 
     <header>
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img src="../images/logo.png" alt="WeMeet_logo">
             <span class="we">We</span><span class="meet">Meet</span>
-        </div>
+        </a>
         <div class="top-right">
             <div class="icons">
                 <button id="settings-btn"><i class='bx bx-cog'></i>
@@ -65,24 +65,12 @@
             <h1>Gọi Video trực tuyến chất lượng cao.</h1>
             <h1>Miễn phí cho mọi người.</h1>
           </div>
-          <div class="description">
-            Kết nối trò chuyện mọi nơi với 
-            <span class="we">We</span><span class="meet">Meet</span>
-          </div>
-          <div class="call-area" >
-            <div class="call-btn">
-              <button class="button-cn">
-                <i class='bx bx-phone'></i>
-                Gọi ngay
-              </button>
+          <div class="input-box">
+            <div class="input-section"> 
+              <i class='bx bxs-keyboard'></i>
+              <input id="meeting-code" placeholder="Nhập mã cuộc họp">
             </div>
-            <div class="input-box">
-              <div class="input-section"> 
-                <i class='bx bxs-keyboard'></i>
-                <input placeholder="Nhập mã cuộc họp">
-              </div>
-              <button class="button-join">Vào</button>
-            </div>
+            <button id="join-button" class="button-join" disabled>Vào</button>
           </div>
           <div class="downline"></div>
         </div>
@@ -93,8 +81,6 @@
     </div>
       
       
-
-
 
     <footer>
 

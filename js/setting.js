@@ -19,3 +19,8 @@ window.addEventListener("click", (event) => {
     modal.style.display = "none";
   }
 });
+const inputField = document.getElementById('meeting-code');
+      const joinButton = document.getElementById('join-button');
+      inputField.addEventListener('input', () => {
+          joinButton.disabled = !inputField.value.trim();
+});

@@ -254,6 +254,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 1em;
 }
 
 .call-btn .button-cn:hover {
@@ -270,6 +271,8 @@ header {
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-right: 2em;
+
 }
 
 .input-section i {
@@ -278,21 +281,22 @@ header {
 }
 
 .input-section input {
-  padding: 10px;
+  padding: 12px;
   padding-left: 10px;
   border: none;
   outline: none;
   font-size: 16px;
+
 }
 
-.input-box .input-section input:focus {
+.input-box .input-section:focus {
   border-color: #1a73e8;
 }
 
 .input-box .button-join {
   background-color: #FFD700;
   color: #fff;
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 1em;
   font-weight: bold;
   border: none;
@@ -311,4 +315,14 @@ header {
   border-color: var(--gm3-sys-color-outline, #747775);
   margin-top: 2em;
   max-width: 42rem;
+}
+
+.input-box:hover .input-section {
+  border-color: #777777;
+}
+
+
+.button-join:disabled {
+  background-color: #d4d4d4;
+  cursor: not-allowed;
 }
