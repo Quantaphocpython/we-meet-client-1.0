@@ -276,3 +276,10 @@ main h1 {
   background-color: #b19600ab;
 }
 
+.downline {
+  align-self: stretch;
+  border-bottom: 1px solid;
+  border-color: var(--gm3-sys-color-outline, #747775);
+  margin-top: 1em;
+  max-width: 42rem;  
+}
