@@ -23,45 +23,65 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <header>
-    <a href="index.html" class="logo">
-      <img src="../images/logo.png" alt="WeMeet_logo">
-      <span class="we">We</span><span class="meet">Meet</span>
-    </a>
-    <div class="top-right">
-      <div class="icons">
-        <button id="settings-btn"><i class='bx bx-cog'></i>
-          <div class="tooltip">
-            Cài đặt
+    <header>
+      <a href="index.html" class="logo">
+          <img src="../images/logo.png" alt="WeMeet_logo">
+          <span class="we">We</span><span class="meet">Meet</span>
+      </a>
+      <div class="top-right">
+        <div id="date-time" class="date-time"></div>
+          <div class="icons">
+              <button id="settings-btn"><i class='bx bx-cog'></i>
+                  <div class="tooltip">Cài đặt</div>
+              </button>
+              <button id="user-btn"><i class='bx bxs-user'></i></button>
           </div>
-        </button>
-        <button id="user-btn"><i class='bx bxs-user'></i></button>
       </div>
-    </div>
-    <div id="settings-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2>Cài đặt</h2>
-        <div class="modal-menu">
-          <button class="menu-item active">Âm thanh</button>
-          <button class="menu-item">Video</button>
-          <button class="menu-item">Cài đặt chung</button>
-        </div>
-        <div class="modal-body">
-          <div class="audio-settings">
-            <h3>Micrô</h3>
-            <select>
-              <option>Microphone (USB Audio Device)</option>
-            </select>
-            <h3>Loa</h3>
-            <select>
-              <option>HEADPHONE (USB Audio Device)</option>
-            </select>
-            <button class="test-button">Kiểm tra</button>
+      <div id="settings-modal" class="modal">
+          <div class="modal-content">
+              <span class="close-button">&times;</span>
+              <h2>Cài đặt</h2>
+              <div class="modal-menu">
+                  <button class="menu-item active">Âm thanh</button>
+                  <button class="menu-item">Video</button>
+                  <button class="menu-item">Cài đặt chung</button>
+              </div>
+              <div class="modal-body">
+                  <div class="audio-settings">
+                      <h3>Micrô</h3>
+                      <select>
+                          <option>Microphone (USB Audio Device)</option>
+                      </select>
+                      <h3>Loa</h3>
+                      <select>
+                          <option>HEADPHONE (USB Audio Device)</option>
+                      </select>
+                      <button class="test-button">Kiểm tra</button>
+                  </div>
+
+                  <div class="video-settings" style="display:none;">
+                      <h3>Video</h3>
+                      <h4>Độ phân giải</h4>
+                      <select id="video-resolution">
+                          <option value="720">720p</option>
+                          <option value="1080">1080p</option>
+                          <option value="1440">1440p</option>
+                          <option value="2160">2160p (4K)</option>
+                      </select>
+                  </div>
+
+                  <div class="general-settings" style="display:none;">
+                      <h3>Cài đặt chung</h3>
+                      <label>
+                          <input type="checkbox" id="" > á đù
+                      </label>
+                      <label>
+                          <input type="checkbox" id=""> á đù
+                      </label>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
   </header>
   <div class="main-container">
     <div class="main-content-left">

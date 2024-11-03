@@ -181,7 +181,78 @@ header {
   border-radius: 4px;
   cursor: pointer;
 }
+/* Video  */
 
+.video-settings h3 {
+  font-size: 16px;
+  color: #202124;
+}
+
+.video-settings h4 {
+  font-size: 14px;
+  color: #5f6368;
+  margin:2px;
+}
+
+.video-settings select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin:2px;
+
+}
+
+/* CAi dat chung */
+.general-settings h3 {
+  font-size: 16px;
+  color: #202124;
+  margin: 10px;
+}
+
+.general-settings label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #5f6368;
+}
+
+.general-settings input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.test-button:hover {
+  background-color: #1669c1; 
+}
+
+.modal-body {
+  margin-left: 30%;
+  padding: 10px;
+}
+
+.modal-body div {
+  margin-bottom: 20px;
+}
+
+.modal-content {
+  transition: transform 0.3s ease;
+}
+
+.modal-content.show {
+  transform: translateY(0);
+}
+
+.modal-content.hide {
+  transform: translateY(-20px);
+}
+
+.date-time {
+  font-size: 16px;
+  color: #5f6368; 
+  margin-right: 20px; 
+  font-weight: bold;
+}
 /*----------------------------------main------------------------------------*/
 .main-container {
   align-items: center;
