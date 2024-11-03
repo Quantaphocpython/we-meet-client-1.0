@@ -1,225 +1,245 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    color: #202124;
-    background-color: #fff;
+  font-family: Arial, sans-serif;
+  color: #202124;
+  background-color: #fff;
 }
 
 /* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo img {
-    margin-right: 0.5rem;
-    width: 3em;
+  margin-right: 0.5rem;
+  width: 3em;
 }
 
 .logo h1 {
-    font-size: 1.5rem;
-    font-weight: normal;
+  font-size: 1.5rem;
+  font-weight: normal;
 }
 
 .top-right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .icons {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    gap: 20px;
-    padding-right: 1em;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 20px;
+  padding-right: 1em;
 }
 
 #settings-btn,
 #user-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #5f6368;
-    position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #5f6368;
+  position: relative;
 }
 
 #settings-btn:hover {
-    color: #006eff;
+  color: #006eff;
 }
 
 .tooltip {
-    visibility: hidden;
-    /* Ẩn đi ban đầu */
-    background-color: #333;
-    color: #ddd;
-    text-align: center;
-    border-radius: 4px;
-    padding: 5px;
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 14px;
-    white-space: nowrap;
+  visibility: hidden;
+  /* Ẩn đi ban đầu */
+  background-color: #333;
+  color: #ddd;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 #settings-btn:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 #user-btn:hover {
-    color: #006eff;
+  color: #006eff;
 }
 
 .icons .bx {
-    font-size: 30px;
-    width: 24px;
-    height: 24px;
-    margin-left: 0.5rem;
+  font-size: 30px;
+  width: 24px;
+  height: 24px;
+  margin-left: 0.5rem;
 }
+
 /* Modal Styling */
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: white;
-    width: 500px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    position: relative;
-  }
-  
-  /* Close Button */
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #5f6368;
-  }
-  
-  /* Modal Menu */
-  .modal-menu {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    float: left;
-  }
-  
-  .menu-item {
-    padding: 10px;
-    text-align: left;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-size: 16px;
-    color: #5f6368;
-  }
-  
-  .menu-item.active {
-    color: #1a73e8;
-    background-color: #e8f0fe;
-    border-radius: 4px;
-  }
-  
-  .modal-body {
-    margin-left: 30%;
-    padding: 10px;
-  }
-  
-  .audio-settings h3 {
-    font-size: 16px;
-    color: #202124;
-  }
-  
-  .audio-settings select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .test-button {
-    background-color: #1a73e8;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-/*----------------------------------main------------------------------------*/
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
-  text-align: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  align-items: center;
 }
 
-main h1 {
+.modal-content {
+  background-color: white;
+  width: 500px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #5f6368;
+}
+
+/* Modal Menu */
+.modal-menu {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  float: left;
+}
+
+.menu-item {
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+  color: #5f6368;
+}
+
+.menu-item.active {
+  color: #1a73e8;
+  background-color: #e8f0fe;
+  border-radius: 4px;
+}
+
+.modal-body {
+  margin-left: 30%;
+  padding: 10px;
+}
+
+.audio-settings h3 {
+  font-size: 16px;
+  color: #202124;
+}
+
+.audio-settings select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.test-button {
+  background-color: #1a73e8;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/*----------------------------------main------------------------------------*/
+.main-container {
+  align-items: center;
+  display: inline-flex;
+  height: 100%;
+  min-height: 80vh;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-container h1 {
   font-size: 2.5em;
-  font-weight:lighter;
+  font-weight: lighter;
   margin: 10px 0;
   color: #333;
 }
+
+.main-content-left {
+  display: inline-flex;
+  flex-direction: column;
+  flex-basis: 35rem;
+  flex-shrink: 1;
+  max-width: 35rem;
+
+}
+
+.main-content-right {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  flex-basis: 45%;
+  overflow: hidden;
+}
+
 .description {
-  font-size: 1.5em; 
+  font-size: 1.5em;
   color: #333;
   margin-top: 15px;
 }
 
 .we {
   font-weight: bold;
-  color: #FFD700; 
+  color: #FFD700;
   font-size: 1.2em;
 }
 
 .meet {
   font-weight: bold;
-  color: #1a73e8; 
+  color: #1a73e8;
   font-size: 1.2em;
 }
 
 .call-area {
   margin-top: 20px;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
   gap: 15px;
 }
@@ -241,25 +261,25 @@ main h1 {
 }
 
 .input-box {
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
 }
 
 .input-section {
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .input-section i {
-  margin-left: 10px; 
-  color: #666; 
+  margin-left: 10px;
+  color: #666;
 }
 
 .input-section input {
   padding: 10px;
-  padding-left: 10px; 
+  padding-left: 10px;
   border: none;
   outline: none;
   font-size: 16px;
@@ -290,5 +310,5 @@ main h1 {
   border-bottom: 1px solid;
   border-color: var(--gm3-sys-color-outline, #747775);
   margin-top: 2em;
-  max-width: 42rem;  
+  max-width: 42rem;
 }
