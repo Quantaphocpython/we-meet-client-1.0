@@ -26,7 +26,7 @@ header {
 
 .logo img {
     margin-right: 0.5rem;
-    width: 5em;
+    width: 3em;
 }
 
 .logo h1 {
@@ -181,3 +181,6 @@ header {
     border-radius: 4px;
     cursor: pointer;
   }
+
+/*----------------------------------main------------------------------------*/
+
