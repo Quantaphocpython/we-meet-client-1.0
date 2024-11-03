@@ -216,7 +216,7 @@ main h1 {
   font-size: 1.2em;
 }
 
-.action-area {
+.call-area {
   margin-top: 20px;
   display: flex;
   flex-direction: row; 
@@ -224,7 +224,7 @@ main h1 {
   gap: 15px;
 }
 
-.action-btn .button-cn {
+.call-btn .button-cn {
   background-color: #1a73e8;
   color: #fff;
   padding: 12px 25px;
@@ -236,24 +236,33 @@ main h1 {
   transition: background-color 0.3s ease;
 }
 
-.action-btn .button-cn:hover {
+.call-btn .button-cn:hover {
   background-color: #1559b0;
 }
 
 .input-box {
-  display: flex;
-  gap: 5px;
+  display: inline-flex; 
   align-items: center;
 }
 
-.input-box .input-section input {
-  padding: 10px;
-  font-size: 1em;
+.input-section {
+  display: inline-flex; 
+  align-items: center;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px;
+  border-radius: 4px;
+}
+
+.input-section i {
+  margin-left: 10px; 
+  color: #666; 
+}
+
+.input-section input {
+  padding: 10px;
+  padding-left: 10px; 
+  border: none;
   outline: none;
-  transition: border-color 0.3s ease;
+  font-size: 16px;
 }
 
 .input-box .input-section input:focus {
