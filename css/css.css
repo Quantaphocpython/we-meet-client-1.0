@@ -210,14 +210,6 @@ header {
 
 }
 
-.main-content-right {
-  align-items: center;
-  display: inline-flex;
-  flex-direction: column;
-  flex-basis: 45%;
-  overflow: hidden;
-}
-
 .description {
   font-size: 1.5em;
   color: #333;
@@ -321,8 +313,16 @@ header {
   border-color: #777777;
 }
 
-
 .button-join:disabled {
   background-color: #d4d4d4;
   cursor: not-allowed;
+}
+
+
+.main-content-right {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  flex-basis: 45%;
+  overflow: hidden;
 }
