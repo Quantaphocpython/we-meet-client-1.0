@@ -269,7 +269,7 @@ main h1 {
   
 }
 
-.input-box .input-section input:focus {
+.input-box .input-section:focus {
   border-color: #1a73e8; 
 }
 
