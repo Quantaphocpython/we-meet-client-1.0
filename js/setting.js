@@ -52,17 +52,15 @@ menuItems.forEach(item => {
     });
 });
 
-// Function to update the date and time
 function updateDateTime() {
   const now = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-  const dateTimeString = now.toLocaleString('vi-VN', options); // Format date/time for Vietnam
-  document.getElementById('date-time').textContent = dateTimeString; // Update the date-time div
+  const dateTimeString = now.toLocaleString('vi-VN', options); 
+  document.getElementById('date-time').textContent = dateTimeString; 
 }
 
-// Update date and time every second
 setInterval(updateDateTime, 1000);
-updateDateTime(); // Initial call to set the date/time immediately
+updateDateTime(); 
 
 
 const inputField = document.getElementById('meeting-code');
