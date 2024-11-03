@@ -20,7 +20,7 @@ window.addEventListener("click", (event) => {
   }
 });
 const inputField = document.getElementById('meeting-code');
-      const joinButton = document.getElementById('join-button');
-      inputField.addEventListener('input', () => {
-          joinButton.disabled = !inputField.value.trim();
+const joinButton = document.getElementById('join-button');
+    inputField.addEventListener('input', () => {
+      joinButton.disabled = !inputField.value.trim();
 });

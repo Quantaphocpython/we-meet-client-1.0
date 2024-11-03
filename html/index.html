@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,9 +22,7 @@
     integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
 <body>
-
   <header>
     <a href="index.html" class="logo">
       <img src="../images/logo.png" alt="WeMeet_logo">
@@ -65,9 +62,7 @@
         </div>
       </div>
     </div>
-
   </header>
-
   <div class="main-container">
     <div class="main-content-left">
       <div class="topmain">
@@ -89,9 +84,9 @@
           <div class="input-box">
             <div class="input-section">
               <i class='bx bxs-keyboard'></i>
-              <input placeholder="Nhập mã cuộc họp">
+              <input id="meeting-code" placeholder="Nhập mã cuộc họp">
             </div>
-            <button class="button-join">Vào</button>
+            <button id="join-button" class="button-join" disabled>Vào</button>
           </div>
         </div>
         <div class="downline"></div>
@@ -115,9 +110,6 @@
 
     </div>
   </div>
-
-
-
   <footer>
 
   </footer>
@@ -133,5 +125,4 @@
   <script src="../js/slider1.js"></script>
   <script src="../js/setting.js"></script>
 </body>
-
 </html>
