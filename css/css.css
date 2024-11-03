@@ -132,6 +132,9 @@ header {
 }
 
 /* Modal Menu */
+.modal{
+  z-index: 100;
+}
 .modal-menu {
   display: flex;
   flex-direction: column;
