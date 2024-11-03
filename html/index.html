@@ -2,105 +2,121 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeMeet</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="../css/css.css">
-    <link rel="icon" type="image/x-icon" href="../favicon_io/favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeMeet</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="../css/css.css">
+  <link rel="icon" type="image/x-icon" href="../favicon_io/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"
+    integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
 
-    <header>
-        <a href="index.html" class="logo">
-            <img src="../images/logo.png" alt="WeMeet_logo">
-            <span class="we">We</span><span class="meet">Meet</span>
-        </a>
-        <div class="top-right">
-            <div class="icons">
-                <button id="settings-btn"><i class='bx bx-cog'></i>
-                    <div class="tooltip">
-                        Cài đặt
-                    </div>
-                </button>
-                <button id="user-btn"><i class='bx bxs-user'></i></button>
-            </div>
-        </div>
-        <div id="settings-modal" class="modal">
-            <div class="modal-content">
-              <span class="close-button">&times;</span>
-              <h2>Cài đặt</h2>
-              <div class="modal-menu">
-                <button class="menu-item active">Âm thanh</button>
-                <button class="menu-item">Video</button>
-                <button class="menu-item">Cài đặt chung</button>
-              </div>
-              <div class="modal-body">
-                <div class="audio-settings">
-                  <h3>Micrô</h3>
-                  <select>
-                    <option>Microphone (USB Audio Device)</option>
-                  </select>
-                  <h3>Loa</h3>
-                  <select>
-                    <option>HEADPHONE (USB Audio Device)</option>
-                  </select>
-                  <button class="test-button">Kiểm tra</button>
-                </div>
-              </div>
-            </div>
+  <header>
+    <a href="index.html" class="logo">
+      <img src="../images/logo.png" alt="WeMeet_logo">
+      <span class="we">We</span><span class="meet">Meet</span>
+    </a>
+    <div class="top-right">
+      <div class="icons">
+        <button id="settings-btn"><i class='bx bx-cog'></i>
+          <div class="tooltip">
+            Cài đặt
           </div>
-        
-    </header>
-    
-    <div class="main-container">
-      <div class="main-content-left">
-        <div class="topmain">
-          <div>
-            <h1>Gọi Video trực tuyến chất lượng cao.</h1>
-            <h1>Miễn phí cho mọi người.</h1>
-          </div>
-          <div class="description">
-            Kết nối trò chuyện mọi nơi với 
-            <span class="we">We</span><span class="meet">Meet</span>
-          </div>
-          <div class="call-area" >
-            <div class="call-btn">
-              <button class="button-cn">
-                <i class='bx bx-phone'></i>
-                Gọi ngay
-              </button>
-            </div>
-            <div class="input-box">
-              <div class="input-section"> 
-                <i class='bx bxs-keyboard'></i>
-                <input placeholder="Nhập mã cuộc họp">
-              </div>
-              <button class="button-join">Vào</button>
-            </div>
-          </div>
-          <div class="downline"></div>
-        </div>
-      </div>
-      <div class="main-content-right">
-        
+        </button>
+        <button id="user-btn"><i class='bx bxs-user'></i></button>
       </div>
     </div>
-      
-      
+    <div id="settings-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Cài đặt</h2>
+        <div class="modal-menu">
+          <button class="menu-item active">Âm thanh</button>
+          <button class="menu-item">Video</button>
+          <button class="menu-item">Cài đặt chung</button>
+        </div>
+        <div class="modal-body">
+          <div class="audio-settings">
+            <h3>Micrô</h3>
+            <select>
+              <option>Microphone (USB Audio Device)</option>
+            </select>
+            <h3>Loa</h3>
+            <select>
+              <option>HEADPHONE (USB Audio Device)</option>
+            </select>
+            <button class="test-button">Kiểm tra</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <footer>
+  </header>
 
-    </footer>
-    
+  <div class="main-container">
+    <div class="main-content-left">
+      <div class="topmain">
+        <div>
+          <h1>Gọi Video trực tuyến chất lượng cao.</h1>
+          <h1>Miễn phí cho mọi người.</h1>
+        </div>
+        <div class="description">
+          Kết nối trò chuyện mọi nơi với
+          <span class="we">We</span><span class="meet">Meet</span>
+        </div>
+        <div class="call-area">
+          <div class="call-btn">
+            <button class="button-cn">
+              <i class='bx bx-phone'></i>
+              Gọi ngay
+            </button>
+          </div>
+          <div class="input-box">
+            <div class="input-section">
+              <i class='bx bxs-keyboard'></i>
+              <input placeholder="Nhập mã cuộc họp">
+            </div>
+            <button class="button-join">Vào</button>
+          </div>
+        </div>
+        <div class="downline"></div>
+      </div>
+    </div>
+    <div class="main-content-right">
+
+    </div>
+  </div>
 
 
-    <script src="../js/setting.js"></script>
+
+  <footer>
+
+  </footer>
+
+
+
+  <script src="../js/setting.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
