@@ -10,6 +10,7 @@ body {
   background-color: #fff;
 }
 
+
 /* Header */
 header {
   display: flex;
@@ -17,6 +18,9 @@ header {
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+}
+header a{
+  text-decoration: none;  
 }
 
 .logo {
