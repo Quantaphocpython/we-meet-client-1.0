@@ -403,10 +403,10 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Giữ cho ảnh không tràn ra ngoài item */
+  overflow: hidden; 
 }
 .slider1 .item-content img {
   width: 100%;
-  height: auto; /* Đảm bảo ảnh giữ nguyên tỷ lệ */
-  object-fit: contain; /* Hoặc dùng cover nếu muốn ảnh che hết không gian */
+  height: auto; 
+  object-fit: contain; 
 }
