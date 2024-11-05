@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #202124;
   background-color: #fff;
 }
@@ -22,6 +22,7 @@ header {
 .logo {
   display: flex;
   align-items: center;
+
 }
 
 .logo img {
@@ -265,7 +266,7 @@ header {
   justify-content: space-evenly;
   width: 100%;
   padding: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .main-container h1 {
