@@ -119,6 +119,7 @@ header a{
 .modal-content {
   background-color: white;
   width: 500px;
+  height: 400px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
