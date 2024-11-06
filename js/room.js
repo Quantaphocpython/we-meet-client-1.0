@@ -23,7 +23,6 @@ export function getUserMediaStream() {
     .getUserMedia({ video: true, audio: true })
     .then(function (stream) {
       var localStream = stream;
-      console.log(stream);
 
       // Gán stream vào thẻ video để hiển thị
       $('#localVideo').srcObject = stream; // #localVideo là id của video element
