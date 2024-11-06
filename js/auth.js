@@ -1,4 +1,5 @@
 export function checkAuthentication() {
+  alert('Hello');
   $.ajax({
     url: 'http://localhost:8080/introspect', // URL của API introspect
     type: 'POST',
