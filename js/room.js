@@ -1,3 +1,5 @@
+import { localPeer } from './config';
+
 export function createRoom() {
   $('#callButton').click(function () {
     $.ajax({
@@ -14,4 +16,19 @@ export function createRoom() {
       },
     });
   });
+}
+
+export function getUserMediaStream() {
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: true })
+    .then(function (stream) {
+      var localStream = stream;
+      console.log(stream);
+
+      // Gán stream vào thẻ video để hiển thị
+      $('#localVideo').srcObject = stream; // #localVideo là id của video element
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }

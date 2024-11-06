@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room</title>
+    <link rel="stylesheet" href="../css/room.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+      integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+      integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="participant">
+        <div class="user">
+          <i class="bi bi-person-fill user-thumbnail"></i>
+          <video class="video" id="localVideo" autoplay muted></video>
+          <p class="user-name">Trần Hoàng Quân</p>
+        </div>
+        <div class="user">
+          <i class="bi bi-person-fill user-thumbnail"></i>
+          <p class="user-name">Trần Hoàng Quân</p>
+        </div>
+      </div>
+
+      <div class="control">
+        <div class="left">
+          <span id="current-time"></span>
+          <span style="display: inline-block; padding: 0 5px">|</span>
+          <span id="roomId"></span>
+        </div>
+        <div class="center">
+          <button class="icon-btn"><i class="bi bi-mic-mute-fill"></i></button>
+          <button class="icon-btn">
+            <i class="bi bi-camera-video-off-fill"></i>
+          </button>
+          <button class="icon-btn"><i class="bi bi-aspect-ratio"></i></button>
+          <button class="icon-btn"><i class="bi bi-emoji-smile"></i></button>
+          <button class="icon-btn"><i class="bi bi-upload"></i></button>
+          <button class="icon-btn"><i class="bi bi-hand-thumbs-up"></i></button>
+          <button class="icon-btn"><i class="bi bi-three-dots"></i></button>
+          <button class="icon-btn end-call">
+            <i class="bi bi-telephone-x-fill"></i>
+          </button>
+        </div>
+
+        <div class="right" style="gap: 2px">
+          <button class="icon-btn non-bg">
+            <i class="bi bi-info-circle"></i>
+          </button>
+          <button class="icon-btn non-bg"><i class="bi bi-people"></i></button>
+          <button class="icon-btn non-bg">
+            <i class="bi bi-chat-dots"></i>
+          </button>
+          <button class="icon-btn non-bg"><i class="bi bi-geo-alt"></i></button>
+          <button class="icon-btn non-bg"><i class="bi bi-lock"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('current-time').textContent =
+          `${hours}:${minutes}`;
+      }
+
+      function getRoomId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomId = urlParams.get('roomId');
+        document.getElementById('roomId').textContent = roomId;
+      }
+
+      setInterval(updateTime, 1000);
+      updateTime();
+      getRoomId();
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then(function (stream) {
+          var localStream = stream;
+          console.log(stream);
+
+          $('#localVideo').srcObject = stream; // #localVideo là id của video element
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    </script>
+    <script type="module" src="../js/meeting.js"></script>
+  </body>
+</html>

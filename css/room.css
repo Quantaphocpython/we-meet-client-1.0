@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  background-color: #202124;
+  width: 100%;
+  height: 100%;
+  padding: 10px 30px;
+}
+
+.participant {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Mỗi khung tối thiểu 250px, tối đa 1fr */
+  gap: 10px;
+  width: 100%;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.participant .user {
+  background-color: #3c4043;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9; /* Tỷ lệ khung hình 16:9 cho video */
+  font-size: 20px;
+  color: #333;
+  color: #fff;
+  position: relative;
+}
+
+.video {
+  width: 400px;
+  height: 400px;
+}
+
+.user-thumbnail {
+  font-size: clamp(
+    50px,
+    10vw,
+    110px
+  ); /* Kích thước linh hoạt từ 50px đến 110px */
+}
+.user-name {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  font-size: 14px;
+}
+
+.control {
+  width: 100%;
+  height: 10%;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left,
+.center,
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.center,
+.right {
+  gap: 10px;
+}
+
+.icon-btn {
+  background-color: #333;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.icon-btn.end-call {
+  background-color: #dc362e;
+}
+
+.icon-btn:hover {
+  background-color: #555;
+}
+
+.non-bg {
+  background-color: transparent;
+  font-size: 20px;
+}
