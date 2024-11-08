@@ -1,5 +1,4 @@
 export function checkAuthentication() {
-  alert('Hello');
   $.ajax({
     url: 'http://localhost:8080/introspect', // URL của API introspect
     type: 'POST',
@@ -9,6 +8,7 @@ export function checkAuthentication() {
     success: function (response) {
       if (response.code === 1000 && response.result.isValid) {
         $('.user-name').text(response.result.userName);
+        localStorage.setItem('user', JSON.stringify(response.result));
       } else {
         $('.user-name').text('Vui lòng đăng nhập');
       }

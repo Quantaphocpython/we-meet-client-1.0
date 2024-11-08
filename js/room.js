@@ -1,5 +1,8 @@
+// room.js
+
+// Hàm tạo phòng và lấy roomId
 export function createRoom() {
-  $('#callButton').click(function () {
+  return new Promise(function (resolve, reject) {
     $.ajax({
       url: 'http://localhost:8080/rooms',
       type: 'POST',
@@ -7,25 +10,27 @@ export function createRoom() {
         withCredentials: true,
       },
       success: function (response) {
-        alert('Phòng được tạo với ID: ' + response.result.id);
+        roomId = response.result.id; // Gán roomId từ server
+        resolve(roomId); // Trả về roomId cho phần gọi hàm
       },
       error: function (xhr, status, error) {
-        alert('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
+        reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
       },
     });
   });
 }
 
+// Hàm lấy stream từ camera và microphone
 export function getUserMediaStream() {
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: true })
     .then(function (stream) {
-      var localStream = stream;
-
-      // Gán stream vào thẻ video để hiển thị
-      $('#localVideo').srcObject = stream; // #localVideo là id của video element
+      localStream = stream;
+      $('#localVideo')[0].srcObject = stream;
     })
     .catch(function (error) {
-      console.log(error);
+      console.error('Lỗi khi truy cập thiết bị media: ', error);
     });
 }
+
+// Kết nối WebSocket và đăng ký nhận tín hiệu WebRTC từ server
