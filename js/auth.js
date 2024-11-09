@@ -24,7 +24,7 @@ export function getMyInfo() {
       }
     },
     error: function () {
-      $('.user-name').text('Có lỗi xảy ra');
+      // $('.user-name').text('Có lỗi xảy ra');
     },
   });
 }

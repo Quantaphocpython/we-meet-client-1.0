@@ -40,9 +40,21 @@ export function getUserMediaStream() {
 }
 
 const localVideo = document.getElementById('localVideo');
-const remoteVideos = document.getElementById('remoteVideos');
+const participant = document.getElementById('participant');
 const localID = JSON.parse(localStorage.getItem('user')).id ?? '';
 const connectBtn = document.getElementById('connectBtn');
+
+// Hàm tạo chuỗi ngẫu nhiên có độ dài tùy ý (ở đây là 8 ký tự)
+function generateRandomString(length) {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 let localStream,
   roomID,
@@ -56,29 +68,47 @@ const iceServers = {
   },
 };
 
-// Khởi tạo và cấu hình peerConnection
 const createPeerConnection = (remoteID) => {
   const peer = new RTCPeerConnection(iceServers);
 
-  // Khi có track (video/audio) mới từ remote user
   peer.ontrack = (event) => {
+    let userDiv = document.getElementById(remoteID);
     let remoteVideo = document.getElementById(remoteID);
 
-    // Nếu chưa có video element cho remoteID, tạo mới
+    if (!userDiv) {
+      userDiv = document.createElement('div');
+      userDiv.id = remoteID; // Đặt id để dễ dàng tham chiếu lại
+      userDiv.classList.add('user');
+
+      const thumbnail = document.createElement('i');
+      thumbnail.classList.add('bi', 'bi-person-fill', 'user-thumbnail');
+
+      const userName = document.createElement('p');
+      userName.classList.add('user-name');
+      userName.textContent = remoteID;
+
+      // Thêm các phần tử vào div người tham gia
+      userDiv.appendChild(thumbnail);
+      userDiv.appendChild(userName);
+
+      // Thêm div người tham gia vào DOM
+      participant.appendChild(userDiv);
+    }
+
+    // Nếu chưa có video cho remoteID, tạo mới video
     if (!remoteVideo) {
       remoteVideo = document.createElement('video');
+      remoteVideo.classList.add('video');
       remoteVideo.id = remoteID;
       remoteVideo.srcObject = event.streams[0];
       remoteVideo.autoplay = true;
-      remoteVideo.style.width = '200px';
-      remoteVideo.style.height = '200px';
-      remoteVideos.appendChild(remoteVideo);
+
+      userDiv.appendChild(remoteVideo);
     } else {
       remoteVideo.srcObject = event.streams[0];
     }
   };
 
-  // Lắng nghe và gửi ICE candidates
   peer.onicecandidate = (event) => handleIceCandidate(event, remoteID);
 
   // Thêm tất cả các track từ local stream vào peer connection
@@ -105,16 +135,22 @@ const handleIceCandidate = (event, remoteID) => {
   }
 };
 
+// Hàm để khởi tạo localStream trước
 export const initLocalStream = () => {
-  navigator.mediaDevices
-    .getUserMedia({ video: true, audio: true })
-    .then((stream) => {
-      localStream = stream;
-      localVideo.srcObject = stream;
-    })
-    .catch((error) => console.log('Error getting user media: ', error));
+  return new Promise((resolve, reject) => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        localStream = stream;
+        localVideo.srcObject = stream; // Hiển thị video local trên giao diện
+        resolve(stream); // Trả về stream khi đã sẵn sàng
+      })
+      .catch((error) => {
+        console.log('Error getting user media: ', error);
+        reject(error); // Nếu có lỗi xảy ra, reject promise
+      });
+  });
 };
-
 // Gửi thông điệp WebSocket
 const sendMessage = (destination, message) => {
   stompClient.send(destination, {}, JSON.stringify(message));
@@ -124,13 +160,13 @@ export async function joinRoom(roomID) {
   try {
     await connectToWebSocket();
     sendMessage('/app/join', { roomId: roomID, userId: localID });
-    window.location.href = `/html/meeting.html?roomId=${roomID}`;
+    // window.location.href = `/html/meeting.html?roomId=${roomID}`;
   } catch (error) {
     console.error('Failed to join room:', error);
   }
 }
 
-const connectToWebSocket = () => {
+export const connectToWebSocket = () => {
   return new Promise((resolve, reject) => {
     const socket = new SockJS(base_url + '/websocket', { debug: false });
     stompClient = Stomp.over(socket);

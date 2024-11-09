@@ -10,6 +10,6 @@ $(document).ready(function () {
 
   $('#join-button').click(() => {
     const roomID = $('#meeting-code').val();
-    joinRoom(roomID);
+    window.location.href = '/html/meeting.html?roomId=' + roomID;
   });
 });
