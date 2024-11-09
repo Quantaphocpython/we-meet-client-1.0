@@ -1,5 +1,5 @@
-import { getUserMediaStream } from './room.js';
+import { initLocalStream } from './room.js';
 
-$(document).ready(function () {
-  getUserMediaStream();
+$(document).ready(() => {
+  initLocalStream();
 });

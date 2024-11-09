@@ -21,6 +21,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
   <body>
     <div class="container">
@@ -83,23 +89,13 @@
       function getRoomId() {
         const urlParams = new URLSearchParams(window.location.search);
         const roomId = urlParams.get('roomId');
+
         document.getElementById('roomId').textContent = roomId;
       }
 
+      getRoomId();
       setInterval(updateTime, 1000);
       updateTime();
-      getRoomId();
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then(function (stream) {
-          var localStream = stream;
-          console.log(stream);
-
-          $('#localVideo').srcObject = stream; // #localVideo là id của video element
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
     </script>
     <script type="module" src="../js/meeting.js"></script>
   </body>

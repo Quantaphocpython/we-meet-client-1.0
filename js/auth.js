@@ -1,13 +1,12 @@
 import { base_url } from './config.js';
+import { getAccessToken } from './config.js';
 
 export function getMyInfo() {
-  const accessToken = localStorage.getItem('accessToken');
-
   $.ajax({
     url: base_url + '/users/my-info',
     type: 'GET',
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${getAccessToken()}`,
     },
     success: function (response) {
       if (response.code === 1000) {
@@ -42,6 +41,7 @@ export function login(e) {
     success: function (response) {
       if (response.code === 1000) {
         localStorage.setItem('accessToken', response.result.accessToken);
+        localStorage.setItem('user', JSON.stringify(response.result.user));
         window.location.href = '/html/index.html';
       } else {
         alert('Sai tên đăng nhập hoặc mật khẩu!');

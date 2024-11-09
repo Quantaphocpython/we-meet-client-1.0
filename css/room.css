@@ -40,19 +40,22 @@ body {
   color: #333;
   color: #fff;
   position: relative;
+  overflow: hidden;
 }
 
 .video {
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .user-thumbnail {
-  font-size: clamp(
-    50px,
-    10vw,
-    110px
-  ); /* Kích thước linh hoạt từ 50px đến 110px */
+  font-size: clamp(50px, 10vw, 110px);
 }
 .user-name {
   position: absolute;
