@@ -1,5 +1,3 @@
-import { localPeer } from './config';
-
 export function createRoom() {
   $('#callButton').click(function () {
     $.ajax({

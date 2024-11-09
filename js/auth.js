@@ -1,16 +1,54 @@
-export function checkAuthentication() {
+import { base_url } from './config.js';
+
+export function getMyInfo() {
+  const accessToken = localStorage.getItem('accessToken');
+
   $.ajax({
-    url: 'http://localhost:8080/introspect', // URL của API introspect
-    type: 'POST',
+    url: base_url + '/users/my-info',
+    type: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
     success: function (response) {
-      if (response.code === 1000 && response.result.isValid) {
-        $('.user-name').text(response.result.userName);
+      if (response.code === 1000) {
+        $('.user-name').empty();
+        $('.user-name').html(`
+        <span class="login-btn">
+              <i
+                class="bx bxs-user"
+                style="margin-right: 16px; font-size: 24px"
+              ></i>
+              <span>${response.result.fullName}</span>
+            </span>`);
       } else {
-        $('.user-name').text('Vui lòng đăng nhập');
+        $('.user-name').text('Không tìm thấy thông tin người dùng');
+      }
+    },
+    error: function () {
+      $('.user-name').text('Có lỗi xảy ra');
+    },
+  });
+}
+
+export function login(e) {
+  const username = $('#username').val();
+  const password = $('#password').val();
+
+  $.ajax({
+    url: base_url + '/auth/login',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({ userName: username, password: password }),
+    success: function (response) {
+      if (response.code === 1000) {
+        localStorage.setItem('accessToken', response.result.accessToken);
+        window.location.href = '/html/index.html';
+      } else {
+        alert('Sai tên đăng nhập hoặc mật khẩu!');
       }
     },
     error: function (error) {
-      $('.username').text('Có lỗi xảy ra');
+      alert('Có lỗi xảy ra, vui lòng thử lại!');
     },
   });
 }
