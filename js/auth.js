@@ -9,7 +9,6 @@ export function getMyInfo() {
       Authorization: `Bearer ${getAccessToken()}`,
     },
     success: function (response) {
-<<<<<<< HEAD
       if (response.code === 1000) {
         $('.user-name').empty();
         $('.user-name').html(`
@@ -20,11 +19,6 @@ export function getMyInfo() {
               ></i>
               <span>${response.result.fullName}</span>
             </span>`);
-=======
-      if (response.code === 1000 && response.result.isValid) {
-        $('.user-name').text(response.result.userName);
-        localStorage.setItem('user', JSON.stringify(response.result));
->>>>>>> 78ffa02798fda23e6ebeaa162e951680c5a0e9bc
       } else {
         $('.user-name').text('Không tìm thấy thông tin người dùng');
       }
