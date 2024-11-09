@@ -57,6 +57,7 @@ body {
 .user-thumbnail {
   font-size: clamp(50px, 10vw, 110px);
 }
+
 .user-name {
   position: absolute;
   left: 20px;
