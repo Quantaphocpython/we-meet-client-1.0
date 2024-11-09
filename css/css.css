@@ -51,6 +51,32 @@ header a{
   padding-right: 1em;
 }
 
+/* Thêm vào tệp css.css của bạn */
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn i {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
 #settings-btn,
 #user-btn {
   background: none;
@@ -137,7 +163,7 @@ header a{
 }
 
 /* Modal Menu */
-.modal{
+.modal {
   z-index: 100;
 }
 .modal-menu {
@@ -199,7 +225,7 @@ header a{
 .video-settings h4 {
   font-size: 14px;
   color: #5f6368;
-  margin:2px;
+  margin: 2px;
 }
 
 .video-settings select {
@@ -208,8 +234,7 @@ header a{
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin:2px;
-
+  margin: 2px;
 }
 
 /* CAi dat chung */
@@ -226,12 +251,12 @@ header a{
   color: #5f6368;
 }
 
-.general-settings input[type="checkbox"] {
+.general-settings input[type='checkbox'] {
   margin-right: 8px;
 }
 
 .test-button:hover {
-  background-color: #1669c1; 
+  background-color: #1669c1;
 }
 
 .modal-body {
@@ -257,8 +282,8 @@ header a{
 
 .date-time {
   font-size: 16px;
-  color: #5f6368; 
-  margin-right: 20px; 
+  color: #5f6368;
+  margin-right: 20px;
   font-weight: bold;
 }
 /*----------------------------------main------------------------------------*/
@@ -286,7 +311,6 @@ header a{
   flex-basis: 35rem;
   flex-shrink: 1;
   max-width: 35rem;
-
 }
 
 .description {
@@ -297,7 +321,7 @@ header a{
 
 .we {
   font-weight: bold;
-  color: #FFD700;
+  color: #ffd700;
   font-size: 1.2em;
 }
 
@@ -343,7 +367,6 @@ header a{
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 2em;
-
 }
 
 .input-section i {
@@ -357,7 +380,6 @@ header a{
   border: none;
   outline: none;
   font-size: 16px;
-
 }
 
 .input-box .input-section:focus {
@@ -365,7 +387,7 @@ header a{
 }
 
 .input-box .button-join {
-  background-color: #FFD700;
+  background-color: #ffd700;
   color: #fff;
   padding: 12px 25px;
   font-size: 1em;
@@ -388,13 +410,13 @@ header a{
   max-width: 42rem;
 }
 
-.input-box .input-section:hover  {
+.input-box .input-section:hover {
   border-color: #777777;
 }
 
 .input-box .button-join:disabled {
   background-color: #d4d4d4;
-  cursor:default;
+  cursor: default;
 }
 
 .main-content-right {
@@ -412,6 +434,7 @@ header a{
 }
 .slider1 .item-content img {
   width: 100%;
-  height: auto; 
-  object-fit: contain; 
+  height: auto; /* Đảm bảo ảnh giữ nguyên tỷ lệ */
+  object-fit: contain; /* Hoặc dùng cover nếu muốn ảnh che hết không gian */
 }
+

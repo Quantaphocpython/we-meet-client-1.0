@@ -14,7 +14,11 @@
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="../css/css.css" />
     <link rel="icon" type="image/x-icon" href="../favicon_io/favicon.ico" />
+    <link rel="stylesheet" href="../css/loading.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -37,13 +41,43 @@
       referrerpolicy="no-referrer"
     />
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+      integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+      integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+      integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+      integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
   </head>
   <body>
+    <!-- <div id="loading-screen" class="loading-screen">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <span>Đang tải...</span>
+      </div>
+    </div> -->
     <header>
       <a href="index.html" class="logo">
         <img src="../images/logo.png" alt="WeMeet_logo" />
@@ -56,8 +90,15 @@
             <i class="bx bx-cog"></i>
             <div class="tooltip">Cài đặt</div>
           </button>
-          <a href="login.html"><button id="user-btn"><i class="bx bxs-user"></i></button></a>
-          <span class="user-name"></span>
+          <span class="user-name"
+            ><a href="./login.html" class="login-btn">
+              <i
+                class="bx bxs-user"
+                style="margin-right: 16px; font-size: 24px"
+              ></i>
+              <span>Đăng nhập</span>
+            </a>
+          </span>
         </div>
       </div>
       <div id="settings-modal" class="modal">
@@ -102,6 +143,7 @@
         </div>
       </div>
     </header>
+
     <div class="main-container">
       <div class="main-content-left">
         <div class="topmain">
@@ -115,7 +157,7 @@
           </div>
           <div class="call-area">
             <div class="call-btn">
-              <button class="button-cn">
+              <button class="button-cn" id="callButton">
                 <i class="bx bx-phone"></i>
                 Gọi ngay
               </button>
@@ -157,20 +199,9 @@
       </div>
     </div>
     <footer></footer>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+
     <script src="../js/slider1.js"></script>
     <script src="../js/setting.js"></script>
-    <script src="../js//auth.js" type="module"></script>
+    <script type="module" src="../js/index.js"></script>
   </body>
 </html>
