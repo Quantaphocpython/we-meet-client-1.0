@@ -54,6 +54,7 @@ menuItems.forEach((item) => {
 
 function updateDateTime() {
   const now = new Date();
+
   const options = {
     weekday: 'long',
     year: 'numeric',
@@ -68,6 +69,7 @@ function updateDateTime() {
 
   // Cập nhật vào thẻ span
   document.getElementById('date-time').textContent = dateTimeString;
+
 }
 
 setInterval(updateDateTime, 1000);
