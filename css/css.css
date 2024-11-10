@@ -563,6 +563,13 @@ body {
     width: 100%;
     height: auto;
   }
+  .date-time {
+    display: none;
+  }
+  .description{
+    font-size: 1rem;
+  }
+  
 }
 
 /* Điều chỉnh footer */

@@ -1,3 +1,5 @@
+/* room.css */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,21 +10,21 @@
 body {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .container {
   background-color: #202124;
   width: 100%;
   height: 100%;
-  padding: 10px 30px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .participant {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(250px, 1fr)
-  ); /* Mỗi khung tối thiểu 250px, tối đa 1fr */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 10px;
   width: 100%;
   height: calc(100vh - 100px);
@@ -35,9 +37,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 16 / 9; /* Tỷ lệ khung hình 16:9 cho video */
+  aspect-ratio: 16 / 9;
   font-size: 20px;
-  color: #333;
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -90,7 +91,7 @@ body {
 .icon-btn {
   background-color: #333;
   border: none;
-  padding: 12px 14px;
+  padding: 10px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -111,4 +112,62 @@ body {
 .non-bg {
   background-color: transparent;
   font-size: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .participant {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .control {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: auto;
+    padding: 10px;
+  }
+
+  .left,
+  .center,
+  .right {
+    gap: 5px;
+  }
+
+  .icon-btn {
+    padding: 8px;
+    font-size: 1.2em;
+  }
+
+  .user-name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .participant {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .control {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+  }
+
+  .icon-btn {
+    padding: 6px;
+    font-size: 1em;
+  }
+
+  .user-thumbnail {
+    font-size: 60px;
+  }
+
+  .user-name {
+    font-size: 10px;
+  }
 }
