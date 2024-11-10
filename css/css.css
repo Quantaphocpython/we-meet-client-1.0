@@ -481,3 +481,92 @@ header a {
   height: auto; /* Đảm bảo ảnh giữ nguyên tỷ lệ */
   object-fit: contain; /* Hoặc dùng cover nếu muốn ảnh che hết không gian */
 }
+
+
+
+
+/* Đặt kích thước font nhỏ hơn trên thiết bị di động */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #202124;
+  background-color: #fff;
+}
+
+/* Điều chỉnh lại bố cục header cho thiết bị di động */
+@media (max-width: 768px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  .top-right {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .icons {
+    gap: 10px;
+  }
+}
+
+/* Điều chỉnh kích thước logo */
+.logo img {
+  width: 2em;
+}
+
+/* Điều chỉnh bố cục chính */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .main-content-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .main-content-right {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .call-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .call-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .input-box {
+    width: 100%;
+  }
+
+  .input-section {
+    width: 100%;
+  }
+}
+
+/* Điều chỉnh slider cho thiết bị di động */
+@media (max-width: 768px) {
+  .slider1 .item img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Điều chỉnh footer */
+footer {
+  padding: 20px;
+  text-align: center;
+}
