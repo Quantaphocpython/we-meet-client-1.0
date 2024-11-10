@@ -69,14 +69,7 @@ function updateDateTime() {
 
   // Cập nhật vào thẻ span
   document.getElementById('date-time').textContent = dateTimeString;
-
 }
 
 setInterval(updateDateTime, 1000);
 updateDateTime();
-
-const inputField = document.getElementById('meeting-code');
-const joinButton = document.getElementById('join-button');
-inputField.addEventListener('input', () => {
-  joinButton.disabled = !inputField.value.trim();
-});
