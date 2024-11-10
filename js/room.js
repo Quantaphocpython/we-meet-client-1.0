@@ -10,9 +10,6 @@ export function createRoom() {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
-      xhrFields: {
-        withCredentials: true,
-      },
       success: function (response) {
         roomId = response.result.id; // Gán roomId từ server
         resolve(roomId); // Trả về roomId cho phần gọi hàm
