@@ -47,11 +47,32 @@ let localStream,
   stompClient,
   peers = {};
 
-// ICE Server Configurations
 const iceServers = {
-  iceServer: {
-    urls: 'stun:stun.l.google.com:19302',
-  },
+  iceServers: [
+    {
+      urls: 'stun:stun.relay.metered.ca:80',
+    },
+    {
+      urls: 'turn:global.relay.metered.ca:80',
+      username: 'a1873c7905653a9507cb5f58',
+      credential: 'TnOJHOhKU/rIEfSX',
+    },
+    {
+      urls: 'turn:global.relay.metered.ca:80?transport=tcp',
+      username: 'a1873c7905653a9507cb5f58',
+      credential: 'TnOJHOhKU/rIEfSX',
+    },
+    {
+      urls: 'turn:global.relay.metered.ca:443',
+      username: 'a1873c7905653a9507cb5f58',
+      credential: 'TnOJHOhKU/rIEfSX',
+    },
+    {
+      urls: 'turns:global.relay.metered.ca:443?transport=tcp',
+      username: 'a1873c7905653a9507cb5f58',
+      credential: 'TnOJHOhKU/rIEfSX',
+    },
+  ],
 };
 
 const createPeerConnection = (remoteID) => {
