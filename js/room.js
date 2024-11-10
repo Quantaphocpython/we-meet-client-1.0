@@ -39,19 +39,8 @@ export function getUserMediaStream() {
 const localVideo = document.getElementById('localVideo');
 const participant = document.getElementById('participant');
 const localID = JSON.parse(localStorage.getItem('user')).id ?? '';
-const connectBtn = document.getElementById('connectBtn');
-
-// Hàm tạo chuỗi ngẫu nhiên có độ dài tùy ý (ở đây là 8 ký tự)
-function generateRandomString(length) {
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+const fullName = JSON.parse(localStorage.getItem('user')).fullName ?? '';
+const userName = JSON.parse(localStorage.getItem('user')).userName ?? '';
 
 let localStream,
   roomID,
@@ -84,15 +73,12 @@ const createPeerConnection = (remoteID) => {
       userName.classList.add('user-name');
       userName.textContent = remoteID;
 
-      // Thêm các phần tử vào div người tham gia
       userDiv.appendChild(thumbnail);
       userDiv.appendChild(userName);
 
-      // Thêm div người tham gia vào DOM
       participant.appendChild(userDiv);
     }
 
-    // Nếu chưa có video cho remoteID, tạo mới video
     if (!remoteVideo) {
       remoteVideo = document.createElement('video');
       remoteVideo.classList.add('video');
@@ -139,12 +125,12 @@ export const initLocalStream = () => {
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         localStream = stream;
-        localVideo.srcObject = stream; // Hiển thị video local trên giao diện
-        resolve(stream); // Trả về stream khi đã sẵn sàng
+        localVideo.srcObject = stream;
+        resolve(stream);
       })
       .catch((error) => {
         console.log('Error getting user media: ', error);
-        reject(error); // Nếu có lỗi xảy ra, reject promise
+        reject(error);
       });
   });
 };
@@ -175,6 +161,10 @@ export const connectToWebSocket = () => {
         console.log('Connected to WebSocket');
         // Đăng ký các subscription sau khi kết nối thành công
         stompClient.subscribe(
+          `/user/${localID}/topic/errors`,
+          handleAnswerError
+        );
+        stompClient.subscribe(
           `/user/${localID}/topic/call`,
           handleIncomingCall
         );
@@ -192,6 +182,62 @@ export const connectToWebSocket = () => {
       }
     );
   });
+};
+
+const handleAnswerError = (error) => {
+  const errorResponse = JSON.parse(error.body);
+  console.log(errorResponse);
+
+  document.body.innerHTML = `
+    <div style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+    ">
+      <div style="
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 90%;
+        transition: transform 0.3s ease;
+        transform: translateY(-10px);
+      ">
+        <h1 style="
+          font-size: 2rem;
+          color: #e63946;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+        ">
+          Error
+        </h1>
+        <p style="
+          font-size: 1.2rem;
+          color: #333;
+          margin-bottom: 30px;
+        ">
+          ${errorResponse.message || 'An unexpected error occurred'}
+        </p>
+        <a href='/html/index.html' style="
+          text-decoration: none;
+          padding: 10px 20px;
+          font-size: 1rem;
+          background-color: #6e8efb;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        ">
+          Về trang chủ
+        </a>
+      </div>
+    </div>
+  `;
 };
 
 // Xử lý cuộc gọi đến
