@@ -559,6 +559,45 @@ body {
 
 /* Điều chỉnh slider cho thiết bị di động */
 @media (max-width: 768px) {
+  header {
+    flex-direction: row; /* Đảm bảo logo và top-right nằm cùng một hàng */
+    justify-content: space-between; /* Giữ khoảng cách giữa logo và top-right */
+    padding: 0.5rem;
+  }
+
+  /* Logo căn bên trái */
+  .logo {
+    margin-right: auto; /* Đẩy logo sang bên trái */
+  }
+
+  .logo img {
+    width: 2.5em; /* giảm kích thước logo */
+  }
+
+  .logo h1 {
+    font-size: 1.25rem; /* giảm kích thước font cho logo */
+  }
+
+  /* Căn top-right sang bên phải */
+  .top-right {
+    display: flex;
+    justify-content: flex-end; /* Căn top-right sang bên phải */
+    align-items: center;
+    width: 35%;
+  }
+
+  .icons {
+    gap: 10px; 
+    padding-right: 0;
+  }
+
+  .user-name {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+
   .slider1 .item img {
     width: 100%;
     height: auto;
@@ -569,7 +608,6 @@ body {
   .description{
     font-size: 1rem;
   }
-  
 }
 
 /* Điều chỉnh footer */
