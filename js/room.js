@@ -23,6 +23,11 @@ const iceServers = {
       urls: 'stun:stun.relay.metered.ca:80',
     },
     {
+      urls: 'relay1.expressturn.com:3478',
+      username: 'efS18A1L7W2JC6AHCW',
+      credential: '6ljJf0XdjGb5dvvD',
+    },
+    {
       urls: 'turn:global.relay.metered.ca:80',
       username: 'a1873c7905653a9507cb5f58',
       credential: 'TnOJHOhKU/rIEfSX',
