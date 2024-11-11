@@ -95,7 +95,6 @@ header a {
   padding-right: 1em;
 }
 
-/* Thêm vào tệp css.css của bạn */
 .login-btn {
   display: inline-flex;
   align-items: center;
@@ -478,8 +477,9 @@ header a {
 }
 .slider1 .item-content img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: auto; /* Đảm bảo ảnh giữ nguyên tỷ lệ */
+  object-fit: contain; /* Hoặc dùng cover nếu muốn ảnh che hết không gian */
+  border-radius: 20px;
 }
 
 .user-fullname {
