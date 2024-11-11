@@ -19,15 +19,15 @@ $(document).ready(() => {
 
   $('#outButton').click(() => leaveRoom(getRoomId()));
 
-  $(window).on('beforeunload', (event) => {
-    leaveRoom(getRoomId());
-    event.returnValue = '';
-  });
+  // $(window).on('beforeunload', (event) => {
+  //   leaveRoom(getRoomId());
+  //   event.returnValue = '';
+  // });
 
-  $(window).on('unload', (event) => {
-    leaveRoom(getRoomId());
-    event.returnValue = '';
-  });
+  // $(window).on('unload', (event) => {
+  //   leaveRoom(getRoomId());
+  //   event.returnValue = '';
+  // });
 });
 
 function getRoomId() {
