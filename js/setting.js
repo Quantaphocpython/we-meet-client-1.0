@@ -5,6 +5,9 @@ const menuItems = document.querySelectorAll('.menu-item');
 const audioSettings = document.querySelector('.audio-settings');
 const videoSettings = document.querySelector('.video-settings');
 const generalSettings = document.querySelector('.general-settings');
+const microphoneSelect = document.getElementById('microphone-select');
+const speakerSelect = document.getElementById('speaker-select');
+const videoDeviceSelect = document.getElementById('video-device-select');
 
 // Nhấn nút cài đặt sẽ mở modal
 settingsButton.addEventListener('click', () => {
@@ -73,3 +76,16 @@ function updateDateTime() {
 
 setInterval(updateDateTime, 1000);
 updateDateTime();
+
+async function populateDeviceLists() {
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  const audioInputs = devices.filter(device => device.kind === 'audioinput');
+  const audioOutputs = devices.filter(device => device.kind === 'audiooutput');
+  const videoInputs = devices.filter(device => device.kind === 'videoinput');
+
+  microphoneSelect.innerHTML = audioInputs.map(device => `<option value="${device.deviceId}">${device.label}</option>`).join('');
+  speakerSelect.innerHTML = audioOutputs.map(device => `<option value="${device.deviceId}">${device.label}</option>`).join('');
+  videoDeviceSelect.innerHTML = videoInputs.map(device => `<option value="${device.deviceId}">${device.label}</option>`).join('');
+}
+
+populateDeviceLists();
