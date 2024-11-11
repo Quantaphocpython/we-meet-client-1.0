@@ -98,11 +98,11 @@
           <div class="modal-body">
             <div class="audio-settings">
               <h3>Micrô</h3>
-              <select>
+              <select id="microphone-select">
                 <option>Microphone (USB Audio Device)</option>
               </select>
               <h3>Loa</h3>
-              <select>
+              <select id="speaker-select">
                 <option>HEADPHONE (USB Audio Device)</option>
               </select>
               <button class="test-button">Kiểm tra</button>
@@ -110,12 +110,9 @@
 
             <div class="video-settings" style="display: none">
               <h3>Video</h3>
-              <h4>Độ phân giải</h4>
-              <select id="video-resolution">
-                <option value="720">720p</option>
-                <option value="1080">1080p</option>
-                <option value="1440">1440p</option>
-                <option value="2160">2160p (4K)</option>
+              <h4>Thiết bị video</h4>
+              <select id="video-device-select">
+                <option>None</option>
               </select>
             </div>
 
