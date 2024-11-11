@@ -1,31 +1,16 @@
 import { base_url } from './config.js';
 import { getAccessToken } from './config.js';
 
-// Hàm tạo phòng và lấy roomId
-export function createRoom() {
-  return new Promise(function (resolve, reject) {
-    $.ajax({
-      url: base_url + '/rooms',
-      type: 'POST',
-      headers: {
-        Authorization: `Bearer ${getAccessToken()}`,
-      },
-      success: function (response) {
-        roomId = response.result.id; // Gán roomId từ server
-        resolve(roomId); // Trả về roomId cho phần gọi hàm
-      },
-      error: function (xhr, status, error) {
-        reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
-      },
-    });
-  });
-}
-
 const localVideo = document.getElementById('localVideo');
 const participant = document.getElementById('participant');
 const localID = JSON.parse(localStorage.getItem('user')).id ?? '';
 const fullName = JSON.parse(localStorage.getItem('user')).fullName ?? '';
 const userName = JSON.parse(localStorage.getItem('user')).userName ?? '';
+const muteButton = document.getElementById('muteButton');
+const videoButton = document.getElementById('videoButton');
+
+let isVideoMuted = false;
+let isMuted = false;
 
 let localStream,
   stompClient,
@@ -60,21 +45,62 @@ const iceServers = {
   ],
 };
 
-// Hàm lấy stream từ camera và microphone
-// export function getUserMediaStream() {
-//   navigator.mediaDevices
-//     .getUserMedia({ video: true, audio: true })
-//     .then(function (stream) {
-//       var localStream = stream;
-//       console.log(stream);
+// Hàm tạo phòng và lấy roomId
+export function createRoom() {
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      url: base_url + '/rooms',
+      type: 'POST',
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+      success: function (response) {
+        roomId = response.result.id; // Gán roomId từ server
+        resolve(roomId); // Trả về roomId cho phần gọi hàm
+      },
+      error: function (xhr, status, error) {
+        reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
+      },
+    });
+  });
+}
 
-//       $('#localVideo').srcObject = stream;
-//       $('#localId .user-name').text(fullName);
-//     })
-//     .catch(function (error) {
-//       console.error('Lỗi khi truy cập thiết bị media: ', error);
-//     });
-// }
+export function toggleAudio() {
+  muteButton.addEventListener('click', () => {
+    if (localStream) {
+      localStream.getAudioTracks().forEach((track) => {
+        track.enabled = !track.enabled;
+      });
+
+      isMuted = !isMuted;
+
+      const icon = muteButton.querySelector('i');
+      if (isMuted) {
+        icon.classList.remove('bi-mic-fill');
+        icon.classList.add('bi-mic-mute-fill');
+      } else {
+        icon.classList.remove('bi-mic-mute-fill');
+        icon.classList.add('bi-mic-fill');
+      }
+    }
+  });
+}
+
+export function toggleVideo() {
+  videoButton.addEventListener('click', () => {
+    if (localStream) {
+      const videoTrack = localStream.getVideoTracks()[0];
+      if (videoTrack) {
+        videoTrack.enabled = !videoTrack.enabled;
+        isVideoMuted = !isVideoMuted;
+
+        videoButton.innerHTML = isVideoMuted
+          ? '<i class="bi bi-camera-video-off-fill"></i>'
+          : '<i class="bi bi-camera-video-fill"></i>';
+      }
+    }
+  });
+}
 
 const createPeerConnection = (remoteID, remoteFullName, remoteUserName) => {
   const peer = new RTCPeerConnection(iceServers);

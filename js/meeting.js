@@ -1,4 +1,4 @@
-import { initLocalStream, connectToWebSocket, joinRoom } from './room.js';
+import { initLocalStream, toggleAudio, toggleVideo, joinRoom } from './room.js';
 
 $(document).ready(() => {
   initLocalStream()
@@ -8,6 +8,8 @@ $(document).ready(() => {
     .catch((error) => {
       console.log('Error initializing local stream:', error);
     });
+  toggleAudio();
+  toggleVideo();
 });
 
 function getRoomId() {
