@@ -1,54 +1,24 @@
 import { base_url } from './config.js';
 import { getAccessToken } from './config.js';
 
-// Hàm tạo phòng và lấy roomId
-export function createRoom() {
-  return new Promise(function (resolve, reject) {
-    $.ajax({
-      url: base_url + '/rooms',
-      type: 'POST',
-      headers: {
-        Authorization: `Bearer ${getAccessToken()}`,
-      },
-      success: function (response) {
-        roomId = response.result.id; // Gán roomId từ server
-        resolve(roomId); // Trả về roomId cho phần gọi hàm
-      },
-      error: function (xhr, status, error) {
-        reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
-      },
-    });
-  });
-}
-
-// Hàm lấy stream từ camera và microphone
-export function getUserMediaStream() {
-  navigator.mediaDevices
-    .getUserMedia({ video: true, audio: true })
-    .then(function (stream) {
-      var localStream = stream;
-      console.log(stream);
-
-      $('#localVideo').srcObject = stream;
-    })
-    .catch(function (error) {
-      console.error('Lỗi khi truy cập thiết bị media: ', error);
-    });
-}
-
 const localVideo = document.getElementById('localVideo');
 const participant = document.getElementById('participant');
 const localID = JSON.parse(localStorage.getItem('user')).id ?? '';
 const fullName = JSON.parse(localStorage.getItem('user')).fullName ?? '';
 const userName = JSON.parse(localStorage.getItem('user')).userName ?? '';
+const muteButton = document.getElementById('muteButton');
+const videoButton = document.getElementById('videoButton');
+
+let isVideoMuted = false;
+let isMuted = false;
 
 let localStream,
-  roomID,
   stompClient,
   peers = {};
 
 const iceServers = {
   iceServers: [
+    { urls: 'stun:stun.l.google.com:19302' },
     {
       urls: 'stun:stun.relay.metered.ca:80',
     },
@@ -75,7 +45,74 @@ const iceServers = {
   ],
 };
 
-const createPeerConnection = (remoteID) => {
+// Hàm tạo phòng và lấy roomId
+export function createRoom() {
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      url: base_url + '/rooms',
+      type: 'POST',
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+      success: function (response) {
+        roomId = response.result.id; // Gán roomId từ server
+        resolve(roomId); // Trả về roomId cho phần gọi hàm
+      },
+      error: function (xhr, status, error) {
+        reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
+      },
+    });
+  });
+}
+
+export function toggleAudio() {
+  muteButton.addEventListener('click', () => {
+    if (localStream) {
+      localStream.getAudioTracks().forEach((track) => {
+        track.enabled = !track.enabled;
+      });
+
+      isMuted = !isMuted;
+
+      const icon = muteButton.querySelector('i');
+      if (isMuted) {
+        icon.classList.remove('bi-mic-fill');
+        icon.classList.add('bi-mic-mute-fill');
+      } else {
+        icon.classList.remove('bi-mic-mute-fill');
+        icon.classList.add('bi-mic-fill');
+      }
+    }
+  });
+}
+
+export function toggleVideo() {
+  videoButton.addEventListener('click', () => {
+    if (localStream) {
+      const videoTrack = localStream.getVideoTracks()[0];
+      if (videoTrack) {
+        // Chuyển trạng thái video track
+        videoTrack.enabled = !videoTrack.enabled;
+        isVideoMuted = !isVideoMuted;
+
+        // Cập nhật nút video (icon)
+        videoButton.innerHTML = isVideoMuted
+          ? '<i class="bi bi-camera-video-off-fill"></i>'
+          : '<i class="bi bi-camera-video-fill"></i>';
+
+        const videoElement = document.getElementById('localVideo');
+
+        if (isVideoMuted) {
+          videoElement.classList.add('video-hidden');
+        } else {
+          videoElement.classList.remove('video-hidden');
+        }
+      }
+    }
+  });
+}
+
+const createPeerConnection = (remoteID, remoteFullName, remoteUserName) => {
   const peer = new RTCPeerConnection(iceServers);
 
   peer.ontrack = (event) => {
@@ -90,12 +127,12 @@ const createPeerConnection = (remoteID) => {
       const thumbnail = document.createElement('i');
       thumbnail.classList.add('bi', 'bi-person-fill', 'user-thumbnail');
 
-      const userName = document.createElement('p');
-      userName.classList.add('user-name');
-      userName.textContent = remoteID;
+      const userNameP = document.createElement('p');
+      userNameP.classList.add('user-name');
+      userNameP.textContent = remoteFullName;
 
       userDiv.appendChild(thumbnail);
-      userDiv.appendChild(userName);
+      userDiv.appendChild(userNameP);
 
       participant.appendChild(userDiv);
     }
@@ -147,6 +184,7 @@ export const initLocalStream = () => {
       .then((stream) => {
         localStream = stream;
         localVideo.srcObject = stream;
+        $('#localId .user-name').text(fullName);
         resolve(stream);
       })
       .catch((error) => {
@@ -163,7 +201,12 @@ const sendMessage = (destination, message) => {
 export async function joinRoom(roomID) {
   try {
     await connectToWebSocket();
-    sendMessage('/app/join', { roomId: roomID, userId: localID });
+    sendMessage('/app/join', {
+      roomId: roomID,
+      userId: localID,
+      fullName: fullName,
+      userName: userName,
+    });
     // window.location.href = `/html/meeting.html?roomId=${roomID}`;
   } catch (error) {
     console.error('Failed to join room:', error);
@@ -262,10 +305,14 @@ const handleAnswerError = (error) => {
 };
 
 // Xử lý cuộc gọi đến
-const handleIncomingCall = (userId) => {
-  const remoteID = userId.body;
-  console.log('Call from: ' + remoteID);
-  const peer = createPeerConnection(remoteID);
+const handleIncomingCall = (join) => {
+  console.log(join);
+  const remoteID = JSON.parse(join.body).userId;
+  const remoteFullName = JSON.parse(join.body).fullName;
+  const remoteUserName = JSON.parse(join.body).userName;
+
+  console.log('Call from: ' + remoteFullName);
+  const peer = createPeerConnection(remoteID, remoteFullName, remoteUserName);
 
   peer.createOffer().then((description) => {
     peer.setLocalDescription(description);
@@ -273,6 +320,8 @@ const handleIncomingCall = (userId) => {
       toUser: remoteID,
       fromUser: localID,
       offer: description,
+      fullName: fullName,
+      userName: userName,
     });
   });
 };
@@ -281,11 +330,16 @@ const handleIncomingCall = (userId) => {
 const handleOffer = (offer) => {
   const o = JSON.parse(offer.body).offer;
   const fromUser = JSON.parse(offer.body).fromUser;
+  const remoteFullName = JSON.parse(offer.body).fullName;
+  const remoteUserName = JSON.parse(offer.body).userName;
+
+  console.log('Offer from: ', remoteFullName);
+  console.log(offer);
 
   let peer = peers[fromUser];
 
   if (!peer) {
-    peer = createPeerConnection(fromUser);
+    peer = createPeerConnection(fromUser, remoteFullName, remoteUserName);
   }
 
   peer
@@ -297,6 +351,8 @@ const handleOffer = (offer) => {
             toUser: fromUser,
             fromUser: localID,
             answer: description,
+            fullName: fullName,
+            userName: userName,
           });
         });
       });
@@ -310,6 +366,8 @@ const handleOffer = (offer) => {
 const handleAnswer = (answer) => {
   const o = JSON.parse(answer.body).answer;
   const fromUser = JSON.parse(answer.body).fromUser;
+  const remoteFullName = JSON.parse(answer.body).fullName;
+  const remoteUserName = JSON.parse(answer.body).userName;
 
   // Kiểm tra xem peer connection cho từ người gửi answer đã tồn tại chưa
   const peer = peers[fromUser];

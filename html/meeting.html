@@ -40,9 +40,9 @@
   <body>
     <div class="container">
       <div class="participant" id="participant">
-        <div class="user">
+        <div class="user" id="localId">
           <i class="bi bi-person-fill user-thumbnail"></i>
-          <p class="user-name">Trần Hoàng Quân</p>
+          <p class="user-name"></p>
           <video class="video" id="localVideo" autoplay muted></video>
         </div>
       </div>
@@ -54,9 +54,11 @@
           <span id="roomId"></span>
         </div>
         <div class="center">
-          <button class="icon-btn"><i class="bi bi-mic-mute-fill"></i></button>
-          <button class="icon-btn">
-            <i class="bi bi-camera-video-off-fill"></i>
+          <button class="icon-btn" id="muteButton">
+            <i class="bi bi-mic-fill"></i>
+          </button>
+          <button class="icon-btn" id="videoButton">
+            <i class="bi bi-camera-video-fill"></i>
           </button>
           <button class="icon-btn"><i class="bi bi-aspect-ratio"></i></button>
           <button class="icon-btn"><i class="bi bi-emoji-smile"></i></button>
