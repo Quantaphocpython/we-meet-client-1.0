@@ -23,9 +23,24 @@ const iceServers = {
       urls: 'stun:stun.relay.metered.ca:80',
     },
     {
-      urls: 'relay1.expressturn.com:3478',
-      username: 'efS18A1L7W2JC6AHCW',
-      credential: '6ljJf0XdjGb5dvvD',
+      urls: 'turn:global.relay.metered.ca:80',
+      username: '72fd48df3532c583179d74fd',
+      credential: 'Qjp+qu2uxDyqsRs+',
+    },
+    {
+      urls: 'turn:global.relay.metered.ca:80?transport=tcp',
+      username: '72fd48df3532c583179d74fd',
+      credential: 'Qjp+qu2uxDyqsRs+',
+    },
+    {
+      urls: 'turn:global.relay.metered.ca:443',
+      username: '72fd48df3532c583179d74fd',
+      credential: 'Qjp+qu2uxDyqsRs+',
+    },
+    {
+      urls: 'turns:global.relay.metered.ca:443?transport=tcp',
+      username: '72fd48df3532c583179d74fd',
+      credential: 'Qjp+qu2uxDyqsRs+',
     },
     {
       urls: 'turn:global.relay.metered.ca:80',
