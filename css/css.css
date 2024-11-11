@@ -482,18 +482,38 @@ header a {
   border-radius: 20px;
 }
 
+.user-fullname {
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
 
-
-
-/* Đặt kích thước font nhỏ hơn trên thiết bị di động */
 body {
   font-family: 'Poppins', sans-serif;
   color: #202124;
   background-color: #fff;
 }
 
+@media (max-width: 1036px) {
+  .call-area {
+    display: block;
+  }
+
+  .input-box {
+    margin-top: 20px;
+  }
+}
+
+.user-icon {
+  margin-right: 16px;
+  font-size: 24px !important;
+}
+
 /* Điều chỉnh lại bố cục header cho thiết bị di động */
-@media (max-width: 768px) {
+@media (max-width: 970px) {
   header {
     display: flex;
     flex-direction: column;
@@ -512,6 +532,13 @@ body {
   .icons {
     gap: 10px;
   }
+
+  .user-fullname {
+    width: 50px;
+  }
+  .top-right {
+    justify-content: right;
+  }
 }
 
 /* Điều chỉnh kích thước logo */
@@ -520,7 +547,7 @@ body {
 }
 
 /* Điều chỉnh bố cục chính */
-@media (max-width: 768px) {
+@media (max-width: 970px) {
   .main-container {
     flex-direction: column;
     align-items: center;
@@ -557,11 +584,23 @@ body {
   }
 }
 
-/* Điều chỉnh slider cho thiết bị di động */
 @media (max-width: 768px) {
+  .user-fullname {
+    display: none;
+  }
+  .login-btn {
+    padding: 8px 10px;
+  }
+  .login-btn .user-icon {
+    margin: 0;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 970px) {
   header {
-    flex-direction: row; /* Đảm bảo logo và top-right nằm cùng một hàng */
-    justify-content: space-between; /* Giữ khoảng cách giữa logo và top-right */
+    flex-direction: row;
+    justify-content: space-between;
     padding: 0.5rem;
   }
 
@@ -587,7 +626,7 @@ body {
   }
 
   .icons {
-    gap: 10px; 
+    gap: 10px;
     padding-right: 0;
   }
 
@@ -597,7 +636,6 @@ body {
     font-size: 0.9rem;
   }
 
-
   .slider1 .item img {
     width: 100%;
     height: auto;
@@ -605,7 +643,7 @@ body {
   .date-time {
     display: none;
   }
-  .description{
+  .description {
     font-size: 1rem;
   }
 }

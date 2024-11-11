@@ -18,7 +18,7 @@ export function getMyInfo() {
                 class="bx bxs-user"
                 style="margin-right: 16px; font-size: 24px"
               ></i>
-              <span>${response.result.fullName}</span>
+              <span class='user-fullname'>${response.result.fullName}</span>
               <i class="bx bx-chevron-down" style="margin: 0 0 5px 8px"></i>
             </span>
             <div class="dropdown-content">

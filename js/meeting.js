@@ -1,4 +1,10 @@
-import { initLocalStream, toggleAudio, toggleVideo, joinRoom } from './room.js';
+import {
+  initLocalStream,
+  toggleAudio,
+  toggleVideo,
+  joinRoom,
+  leaveRoom,
+} from './room.js';
 
 $(document).ready(() => {
   initLocalStream()
@@ -8,8 +14,20 @@ $(document).ready(() => {
     .catch((error) => {
       console.log('Error initializing local stream:', error);
     });
-  toggleAudio();
-  toggleVideo();
+  toggleAudio(getRoomId());
+  toggleVideo(getRoomId());
+
+  $('#outButton').click(() => leaveRoom(getRoomId()));
+
+  $(window).on('beforeunload', (event) => {
+    leaveRoom(getRoomId());
+    event.returnValue = '';
+  });
+
+  $(window).on('unload', (event) => {
+    leaveRoom(getRoomId());
+    event.returnValue = '';
+  });
 });
 
 function getRoomId() {

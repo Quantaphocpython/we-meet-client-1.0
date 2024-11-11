@@ -55,8 +55,8 @@ export function createRoom() {
         Authorization: `Bearer ${getAccessToken()}`,
       },
       success: function (response) {
-        roomId = response.result.id; // Gán roomId từ server
-        resolve(roomId); // Trả về roomId cho phần gọi hàm
+        const roomId = response.result.id;
+        resolve(roomId);
       },
       error: function (xhr, status, error) {
         reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);
@@ -65,7 +65,7 @@ export function createRoom() {
   });
 }
 
-export function toggleAudio() {
+export function toggleAudio(roomID) {
   muteButton.addEventListener('click', () => {
     if (localStream) {
       localStream.getAudioTracks().forEach((track) => {
@@ -82,20 +82,42 @@ export function toggleAudio() {
         icon.classList.remove('bi-mic-mute-fill');
         icon.classList.add('bi-mic-fill');
       }
+
+      const localUserDiv = document.getElementById('localId');
+      if (localUserDiv) {
+        let micIcon = localUserDiv.querySelector('.mic-icon');
+
+        if (isMuted) {
+          if (!micIcon) {
+            micIcon = document.createElement('i');
+            micIcon.classList.add('bi', 'bi-mic-mute-fill', 'mic-icon');
+            localUserDiv.appendChild(micIcon);
+          }
+        } else {
+          if (micIcon) {
+            micIcon.remove();
+          }
+        }
+      }
+
+      // Gửi thông điệp cập nhật trạng thái mic cho server
+      sendMessage('/app/audioToggle', {
+        userId: localID,
+        roomId: roomID,
+        isMuted: isMuted,
+      });
     }
   });
 }
 
-export function toggleVideo() {
+export function toggleVideo(roomID) {
   videoButton.addEventListener('click', () => {
     if (localStream) {
       const videoTrack = localStream.getVideoTracks()[0];
       if (videoTrack) {
-        // Chuyển trạng thái video track
         videoTrack.enabled = !videoTrack.enabled;
         isVideoMuted = !isVideoMuted;
 
-        // Cập nhật nút video (icon)
         videoButton.innerHTML = isVideoMuted
           ? '<i class="bi bi-camera-video-off-fill"></i>'
           : '<i class="bi bi-camera-video-fill"></i>';
@@ -107,9 +129,43 @@ export function toggleVideo() {
         } else {
           videoElement.classList.remove('video-hidden');
         }
+
+        sendMessage('/app/videoToggle', {
+          userId: localID,
+          roomId: roomID,
+          isVideoMuted: isVideoMuted,
+        });
       }
     }
   });
+}
+
+export function leaveRoom(roomId) {
+  if (localStream) {
+    localStream.getTracks().forEach((track) => track.stop());
+  }
+
+  for (const peerId in peers) {
+    if (peers[peerId]) {
+      peers[peerId].close();
+      delete peers[peerId];
+    }
+  }
+
+  if (stompClient && stompClient.connected) {
+    sendMessage('/app/leave', {
+      roomId: roomId,
+      userId: localID,
+      fullName: fullName,
+      userName: userName,
+    });
+
+    stompClient.disconnect(() => {
+      console.log('Đã ngắt kết nối khỏi WebSocket');
+    });
+  }
+
+  window.location.href = '/html/index.html';
 }
 
 const createPeerConnection = (remoteID, remoteFullName, remoteUserName) => {
@@ -152,10 +208,8 @@ const createPeerConnection = (remoteID, remoteFullName, remoteUserName) => {
 
   peer.onicecandidate = (event) => handleIceCandidate(event, remoteID);
 
-  // Thêm tất cả các track từ local stream vào peer connection
   localStream.getTracks().forEach((track) => peer.addTrack(track, localStream));
 
-  // Lưu peer connection vào object peers để quản lý
   peers[remoteID] = peer;
 
   return peer;
@@ -200,7 +254,7 @@ const sendMessage = (destination, message) => {
 
 export async function joinRoom(roomID) {
   try {
-    await connectToWebSocket();
+    await connectToWebSocket(roomID);
     sendMessage('/app/join', {
       roomId: roomID,
       userId: localID,
@@ -213,16 +267,16 @@ export async function joinRoom(roomID) {
   }
 }
 
-export const connectToWebSocket = () => {
+export const connectToWebSocket = (roomID) => {
   return new Promise((resolve, reject) => {
     const socket = new SockJS(base_url + '/websocket', { debug: false });
     stompClient = Stomp.over(socket);
-    console.log('My ID: ' + localID);
+    console.log('ID của tôi: ' + localID);
 
     stompClient.connect(
       {},
       () => {
-        console.log('Connected to WebSocket');
+        console.log('Kết nối WebSocket thành công');
         // Đăng ký các subscription sau khi kết nối thành công
         stompClient.subscribe(
           `/user/${localID}/topic/errors`,
@@ -238,14 +292,92 @@ export const connectToWebSocket = () => {
           `/user/${localID}/topic/candidate`,
           handleCandidateReceived
         );
+        stompClient.subscribe(`/user/${localID}/topic/leave`, handleLeave);
+        stompClient.subscribe(
+          `/user/${localID}/topic/videoToggle`,
+          handleVideoToggle
+        );
+        stompClient.subscribe(
+          `/user/${localID}/topic/audioToggle`,
+          handleAudioToggle
+        );
         resolve();
       },
       (error) => {
-        console.error('Error connecting to WebSocket:', error);
+        console.error('Lỗi khi kết nối tới WebSocket:', error);
         reject(error);
       }
     );
+
+    setInterval(() => {
+      if (!stompClient.connected) {
+        console.warn('Mất kết nối WebSocket, tự động rời phòng');
+        leaveRoom(roomID);
+      }
+    }, 1000);
   });
+};
+
+const handleAudioToggle = (message) => {
+  const data = JSON.parse(message.body);
+  const userId = data.userId;
+  const isMuted = data.isMuted;
+
+  console.log(
+    `Nhận thông báo: Người dùng ${userId} đã ${isMuted ? 'tắt' : 'bật'} mic`
+  );
+
+  const userDiv = document.getElementById(userId);
+  if (userDiv) {
+    let micIcon = userDiv.querySelector('.mic-icon');
+
+    if (isMuted) {
+      if (!micIcon) {
+        micIcon = document.createElement('i');
+        micIcon.classList.add('bi', 'bi-mic-mute-fill', 'mic-icon');
+        userDiv.appendChild(micIcon);
+      }
+    } else {
+      if (micIcon) {
+        micIcon.remove();
+      }
+    }
+  }
+};
+
+const handleVideoToggle = (message) => {
+  const data = JSON.parse(message.body);
+  const userId = data.userId;
+  const isVideoMuted = data.isVideoMuted;
+
+  console.log(
+    `Nhận thông báo: Người dùng ${userId} đã ${isVideoMuted ? 'tắt' : 'bật'} camera`
+  );
+
+  const userDiv = document.getElementById(userId);
+  if (userDiv) {
+    const videoElement = userDiv.querySelector('video');
+
+    if (videoElement) {
+      if (isVideoMuted) {
+        videoElement.classList.add('video-hidden');
+      } else {
+        videoElement.classList.remove('video-hidden');
+      }
+    }
+  }
+};
+
+export const handleLeave = (leaveMessage) => {
+  const data = JSON.parse(leaveMessage.body);
+  const userId = data.userId;
+
+  console.log(`User ${userId} đã rời khỏi phòng`);
+
+  const userDiv = document.getElementById(userId);
+  if (userDiv) {
+    userDiv.remove();
+  }
 };
 
 const handleAnswerError = (error) => {
@@ -306,7 +438,6 @@ const handleAnswerError = (error) => {
 
 // Xử lý cuộc gọi đến
 const handleIncomingCall = (join) => {
-  console.log(join);
   const remoteID = JSON.parse(join.body).userId;
   const remoteFullName = JSON.parse(join.body).fullName;
   const remoteUserName = JSON.parse(join.body).userName;
@@ -332,9 +463,6 @@ const handleOffer = (offer) => {
   const fromUser = JSON.parse(offer.body).fromUser;
   const remoteFullName = JSON.parse(offer.body).fullName;
   const remoteUserName = JSON.parse(offer.body).userName;
-
-  console.log('Offer from: ', remoteFullName);
-  console.log(offer);
 
   let peer = peers[fromUser];
 
