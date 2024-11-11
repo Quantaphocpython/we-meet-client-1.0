@@ -329,12 +329,12 @@ export const connectToWebSocket = (roomID) => {
       }
     );
 
-    setInterval(() => {
-      if (!stompClient.connected) {
-        console.warn('Mất kết nối WebSocket, tự động rời phòng');
-        leaveRoom(roomID);
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   if (!stompClient.connected) {
+    //     console.warn('Mất kết nối WebSocket, tự động rời phòng');
+    //     leaveRoom(roomID);
+    //   }
+    // }, 1000);
   });
 };
 
