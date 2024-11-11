@@ -91,12 +91,22 @@ export function toggleVideo() {
     if (localStream) {
       const videoTrack = localStream.getVideoTracks()[0];
       if (videoTrack) {
+        // Chuyển trạng thái video track
         videoTrack.enabled = !videoTrack.enabled;
         isVideoMuted = !isVideoMuted;
 
+        // Cập nhật nút video (icon)
         videoButton.innerHTML = isVideoMuted
           ? '<i class="bi bi-camera-video-off-fill"></i>'
           : '<i class="bi bi-camera-video-fill"></i>';
+
+        const videoElement = document.getElementById('localVideo');
+
+        if (isVideoMuted) {
+          videoElement.classList.add('video-hidden');
+        } else {
+          videoElement.classList.remove('video-hidden');
+        }
       }
     }
   });

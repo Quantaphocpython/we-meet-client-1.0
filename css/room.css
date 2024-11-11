@@ -76,6 +76,10 @@ body {
   bottom: 0;
 }
 
+.video-hidden {
+  display: none;
+}
+
 .user-thumbnail {
   font-size: clamp(50px, 10vw, 110px);
 }
