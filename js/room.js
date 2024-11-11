@@ -55,8 +55,8 @@ export function createRoom() {
         Authorization: `Bearer ${getAccessToken()}`,
       },
       success: function (response) {
-        roomId = response.result.id; // Gán roomId từ server
-        resolve(roomId); // Trả về roomId cho phần gọi hàm
+        const roomId = response.result.id;
+        resolve(roomId);
       },
       error: function (xhr, status, error) {
         reject('Có lỗi xảy ra khi tạo phòng: ' + xhr.responseText);

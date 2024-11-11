@@ -16,12 +16,10 @@
     <link rel="icon" type="image/x-icon" href="../favicon_io/favicon.ico" />
     <link rel="stylesheet" href="../css/loading.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Poppins"
     />
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -63,6 +61,10 @@
     ></script>
   </head>
   <body>
+    <div class="loading-screen">
+      <span class="spinner"></span>
+      <p class="loading-content">Đang tải</p>
+    </div>
     <header>
       <a href="index.html" class="logo">
         <img src="../images/logo.png" alt="WeMeet_logo" />
@@ -77,11 +79,8 @@
           </button>
           <span class="user-name"
             ><a href="./login.html" class="login-btn">
-              <i
-                class="bx bxs-user"
-                style="margin-right: 16px; font-size: 24px"
-              ></i>
-              <span>Đăng nhập</span>
+              <i class="bx bxs-user user-icon"></i>
+              <span class="user-fullname">Đăng nhập</span>
             </a>
           </span>
         </div>
