@@ -19,49 +19,6 @@ let localStream,
 const iceServers = {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },
-    {
-      urls: 'stun:stun.relay.metered.ca:80',
-    },
-    {
-      urls: 'turn:global.relay.metered.ca:80',
-      username: '72fd48df3532c583179d74fd',
-      credential: 'Qjp+qu2uxDyqsRs+',
-    },
-    {
-      urls: 'turn:global.relay.metered.ca:80?transport=tcp',
-      username: '72fd48df3532c583179d74fd',
-      credential: 'Qjp+qu2uxDyqsRs+',
-    },
-    {
-      urls: 'turn:global.relay.metered.ca:443',
-      username: '72fd48df3532c583179d74fd',
-      credential: 'Qjp+qu2uxDyqsRs+',
-    },
-    {
-      urls: 'turns:global.relay.metered.ca:443?transport=tcp',
-      username: '72fd48df3532c583179d74fd',
-      credential: 'Qjp+qu2uxDyqsRs+',
-    },
-    {
-      urls: 'turn:global.relay.metered.ca:80',
-      username: 'a1873c7905653a9507cb5f58',
-      credential: 'TnOJHOhKU/rIEfSX',
-    },
-    {
-      urls: 'turn:global.relay.metered.ca:80?transport=tcp',
-      username: 'a1873c7905653a9507cb5f58',
-      credential: 'TnOJHOhKU/rIEfSX',
-    },
-    {
-      urls: 'turn:global.relay.metered.ca:443',
-      username: 'a1873c7905653a9507cb5f58',
-      credential: 'TnOJHOhKU/rIEfSX',
-    },
-    {
-      urls: 'turns:global.relay.metered.ca:443?transport=tcp',
-      username: 'a1873c7905653a9507cb5f58',
-      credential: 'TnOJHOhKU/rIEfSX',
-    },
   ],
 };
 
