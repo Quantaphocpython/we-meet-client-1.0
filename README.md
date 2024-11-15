@@ -25,7 +25,7 @@ https://github.com/Quantaphocpython/we-meet-client.git
 https://wemeet-client.vercel.app/html/index.html
 ```
 ## User Interface
-- Homepage:
+- Home page:
 
 <p style="border: 2px solid #ccc; padding: 5px; display: inline-block;">
     <img src="/demo/home.png" alt="Ảnh WeMeet">
